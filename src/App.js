@@ -5,10 +5,10 @@ import firebaseConfig from './firebase/config';
 
 import Hiro from './components/Hiro/Hiro';
 import Menu from './components/Menu/Menu';
+import GalleryPage from './components/GalleryPage/GalleryPage';
 
 const StyledDiv = styled.div`
  
-  
   width: 100vw;
   height: 100vh;
 
@@ -73,10 +73,14 @@ class App extends React.Component {
 
     render() {
         return ( 
-        <StyledDiv>
-            <Hiro />
-            <Menu />
-          </StyledDiv>
+          <div>
+            <StyledDiv>
+              <Hiro />
+              <Menu />
+            </StyledDiv>
+            <GalleryPage />
+          </div>
+
         );
     }
 
