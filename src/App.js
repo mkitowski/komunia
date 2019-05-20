@@ -10,7 +10,7 @@ import Movie from './components/Movie/Movie';
 
 const StyledDiv = styled.div`
 
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 
   video {
@@ -32,7 +32,7 @@ const StyledDiv = styled.div`
     width: 100%;
     height: 100%;
     text-align: center;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3);
     color: white;
     display: flex;
     justify-content: center;
@@ -72,14 +72,32 @@ class App extends React.Component {
     Firebase.initializeApp(firebaseConfig.firebase);
   }
 
+  state = {
+    MovieVisible: false,
+    HiroVisible: true
+  }
+
+  onMovieClicked = () => {
+    this.setState({
+      MovieVisible: true
+    });
+    setTimeout(()=>{
+      window.scrollTo({
+        behavior: "smooth",
+        top: window.innerHeight,
+        left: 0
+      });
+    },100);
+
+  }
   render() {
     return (
       <div>
-        <StyledDiv>
+        {this.state.HiroVisible && <StyledDiv>
           <Hiro />
-          <Menu />
-        </StyledDiv>
-        <Movie />
+          <Menu handler={this.onMovieClicked}/>
+        </StyledDiv>}
+        {this.state.MovieVisible && <Movie />}
         {/* <GalleryPage /> */}
       </div>
 

@@ -4,7 +4,7 @@ import Youtube from 'react-youtube';
 
 const StyledDiv = styled.div`
   background: rgba(0, 0, 0, 1);
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   z-index: 2;
   display: flex;
