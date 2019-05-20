@@ -70,11 +70,33 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     Firebase.initializeApp(firebaseConfig.firebase);
+    this.listenPosition();
   }
+
+
 
   state = {
     MovieVisible: false,
     HiroVisible: true
+  }
+
+  listenPosition() {
+    window.addEventListener('scroll', ()=>{
+      if (window.pageYOffset <= 1){
+        this.setState({
+          MovieVisible: false
+        })
+      }
+      if (window.pageYOffset >= window.innerHeight){
+        this.setState({
+          HiroVisible: false
+        })
+      }else{
+        this.setState({
+          HiroVisible: true
+        })
+      }
+    })
   }
 
   onMovieClicked = () => {
@@ -93,10 +115,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {this.state.HiroVisible && <StyledDiv>
-          <Hiro />
+        <StyledDiv>
+          {this.state.HiroVisible && <Hiro />}
           <Menu handler={this.onMovieClicked}/>
-        </StyledDiv>}
+        </StyledDiv>
         {this.state.MovieVisible && <Movie />}
         {/* <GalleryPage /> */}
       </div>
