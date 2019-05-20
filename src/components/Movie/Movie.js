@@ -3,7 +3,15 @@ import styled from 'styled-components';
 import Youtube from 'react-youtube';
 
 const StyledDiv = styled.div`
-  background: rgba(0, 0, 0, 1);
+  @keyframes opacityBkg {
+    0% {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    100% {
+      background-color: rgba(0, 0, 0, 1);
+    }
+  }
+  animation: 1.5s ease-in-out 1 opacityBkg forwards;
   width: 100%;
   height: 100vh;
   z-index: 2;
@@ -18,9 +26,9 @@ const StyledDiv = styled.div`
 
 class Movie extends React.Component {
 
-_onReadyHandler = event => {
+  _onReadyHandler = event => {
     event.target.pauseVideo();
-}
+  }
 
   render() {
     const opts = {

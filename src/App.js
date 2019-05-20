@@ -7,6 +7,7 @@ import Hiro from './components/Hiro/Hiro';
 import Menu from './components/Menu/Menu';
 import GalleryPage from './components/GalleryPage/GalleryPage';
 import Movie from './components/Movie/Movie';
+import MoveToTop from './components/MoveToTop/MoveToTop';
 
 const StyledDiv = styled.div`
 
@@ -77,21 +78,19 @@ class App extends React.Component {
 
   state = {
     MovieVisible: false,
-    HiroVisible: true
+    HiroVisible: true,
+    toTopButtonVisible: false
   }
 
   listenPosition() {
-    window.addEventListener('scroll', ()=>{
-      if (window.pageYOffset <= 1){
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset <= 1) {
         this.setState({
-          MovieVisible: false
+          MovieVisible: false,
+          toTopButtonVisible: false
         })
       }
-      if (window.pageYOffset >= window.innerHeight){
-        this.setState({
-          HiroVisible: false
-        })
-      }else{
+      if (window.pageYOffset <= window.innerHeight) {
         this.setState({
           HiroVisible: true
         })
@@ -103,24 +102,41 @@ class App extends React.Component {
     this.setState({
       MovieVisible: true
     });
-    setTimeout(()=>{
+    setTimeout(() => {
       window.scrollTo({
         behavior: "smooth",
         top: window.innerHeight,
         left: 0
       });
-    },100);
+    }, 100);
+    setTimeout(() => {
+      this.setState({
+        HiroVisible: false,
+        toTopButtonVisible: true
+      })
+    }, 1600);
+  }
+
+  onClickToTop = () => {
+    window.scrollTo({
+      behavior: "smooth",
+      top: 0,
+      left: 0
+    });
 
   }
+
+
   render() {
     return (
       <div>
         <StyledDiv>
           {this.state.HiroVisible && <Hiro />}
-          <Menu handler={this.onMovieClicked}/>
+          <Menu handler={this.onMovieClicked} />
         </StyledDiv>
         {this.state.MovieVisible && <Movie />}
         {/* <GalleryPage /> */}
+        {this.state.toTopButtonVisible && <MoveToTop handler={this.onClickToTop} />}
       </div>
 
     );
