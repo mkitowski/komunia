@@ -6,9 +6,10 @@ import firebaseConfig from './firebase/config';
 import Hiro from './components/Hiro/Hiro';
 import Menu from './components/Menu/Menu';
 import GalleryPage from './components/GalleryPage/GalleryPage';
+import Movie from './components/Movie/Movie';
 
 const StyledDiv = styled.div`
- 
+
   width: 100vw;
   height: 100vh;
 
@@ -18,14 +19,14 @@ const StyledDiv = styled.div`
     z-index: -1;
 
 @media screen and (max-aspect-ratio: 1920/1080) {
-    height: 100%;
+    min-height: 100%;
     width: auto;
 }
 @media screen and (min-aspect-ratio: 1920/1080) {
 
-    width: 100%;
+    min-width: 100%;
     height: auto;
-  
+
 } }
   .menu {
     width: 100%;
@@ -66,23 +67,24 @@ const StyledDiv = styled.div`
 `;
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        Firebase.initializeApp(firebaseConfig.firebase);
-    }
+  constructor(props) {
+    super(props);
+    Firebase.initializeApp(firebaseConfig.firebase);
+  }
 
-    render() {
-        return ( 
-          <div>
-            <StyledDiv>
-              <Hiro />
-              <Menu />
-            </StyledDiv>
-            <GalleryPage />
-          </div>
+  render() {
+    return (
+      <div>
+        <StyledDiv>
+          <Hiro />
+          <Menu />
+        </StyledDiv>
+        <Movie />
+        {/* <GalleryPage /> */}
+      </div>
 
-        );
-    }
+    );
+  }
 
 }
 

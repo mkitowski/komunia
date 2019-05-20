@@ -8,8 +8,8 @@ const Menu = (props) => {
                 <h2>Magdalena i Karolina Kitowskie</h2>
                 <h3>11.05.2019</h3>
                 <ul>
-                    <li>Zdjęcia</li>
                     <li>Film</li>
+                    <li>Zdjęcia</li>
                 </ul>
             </div>
         </div>
