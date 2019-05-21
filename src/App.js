@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Firebase from 'firebase';
-import firebaseConfig from './firebase/config';
+import * as firebase from "firebase/app";
+// import Firebase from 'firebase';
+import firebaseConfig from "./firebase/config";
+import "firebase/storage";
 
 import Hiro from './components/Hiro/Hiro';
 import Menu from './components/Menu/Menu';
@@ -70,16 +72,27 @@ const StyledDiv = styled.div`
 class App extends React.Component {
   constructor(props) {
     super(props);
-    Firebase.initializeApp(firebaseConfig.firebase);
+
     this.listenPosition();
   }
 
 
 
   state = {
+    
     MovieVisible: false,
     HiroVisible: true,
     toTopButtonVisible: false
+  }
+
+  componentDidMount(){
+    firebase.initializeApp(firebaseConfig);
+    const storage = firebase.storage();
+    this.setState({
+      storage,
+    });
+    console.log(storage.ref().child('0001.jpg'));// <-- gitara
+    
   }
 
   listenPosition() {
@@ -135,7 +148,7 @@ class App extends React.Component {
           <Menu handler={this.onMovieClicked} />
         </StyledDiv>
         {this.state.MovieVisible && <Movie />}
-        {/* <GalleryPage /> */}
+        <GalleryPage store={this.state.storage} />
         {this.state.toTopButtonVisible && <MoveToTop handler={this.onClickToTop} />}
       </div>
 
